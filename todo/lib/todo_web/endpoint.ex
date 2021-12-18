@@ -7,11 +7,7 @@ defmodule TodoWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_todo_key",
-<<<<<<< HEAD
-    signing_salt: "4B/jaj2w"
-=======
     signing_salt: "Eml3GmLr"
->>>>>>> 3cbb5f88a741f074ad5b0ed87c9f687d9bb66fec
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]

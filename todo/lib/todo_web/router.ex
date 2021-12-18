@@ -16,20 +16,13 @@ defmodule TodoWeb.Router do
 
   scope "/", TodoWeb do
     pipe_through :browser
-<<<<<<< HEAD
       live "/", ItemLive.Index, :index
-=======
->>>>>>> 3cbb5f88a741f074ad5b0ed87c9f687d9bb66fec
       live "/items", ItemLive.Index, :index
       live "/items/new", ItemLive.Index, :new
       live "/items/:id/edit", ItemLive.Index, :edit
 
       live "/items/:id", ItemLive.Show, :show
       live "/items/:id/show/edit", ItemLive.Show, :edit
-<<<<<<< HEAD
-
-=======
->>>>>>> 3cbb5f88a741f074ad5b0ed87c9f687d9bb66fec
     get "/", PageController, :index
   end
 
