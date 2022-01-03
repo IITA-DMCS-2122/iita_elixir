@@ -23,7 +23,7 @@ Polecenie dokona migracji, a jeśli ktoś chciałby przeczytać więcej na temat
 
 Jeśli migracja wykona się pomyślnie, w bazie danych powinna stworzyć się tabel items. Następnie można wykonać polecenie
 ```
-mix.phx server
+mix phx.server
 ```
 , które powinno uruchomić aplikację
 
