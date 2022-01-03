@@ -19,7 +19,7 @@ Jeżeli wszystko zostało zainstalowane pomyślnie, należy przejść do katalog
 ```
 mix ecto.migrate
 ```
-Polecenie dokona migracji, a jeśli ktoś chciałby przeczytać więcej na temat tego polecenia to odsyłam do dokumentacji [ecto.migrate](https://hexdocs.pm/ecto_sql/Mix.Tasks.Ecto.Migrate.html). Istotne jest, aby w bazie danych postgress znajdował się użytkownik postgress z hasłem postgress. Jeżeli baza danych nie posiada takiego użytkownika konieczne jest zmodyfikowanie danych użytkownika w bazie danych w pliku todo/config/dev.exs na takie jakie posiadamy lokalnie.
+Polecenie dokona migracji, a jeśli ktoś chciałby przeczytać więcej na temat tego polecenia to odsyłam do dokumentacji [ecto.migrate](https://hexdocs.pm/ecto_sql/Mix.Tasks.Ecto.Migrate.html). Istotne jest, aby w bazie danych postgress znajdował się użytkownik **postgres** z hasłem **postgres**. Jeżeli baza danych nie posiada takiego użytkownika konieczne jest zmodyfikowanie danych użytkownika w bazie danych w pliku todo/config/dev.exs na takie jakie posiadamy lokalnie.
 
 Jeśli migracja wykona się pomyślnie, w bazie danych powinna stworzyć się tabel items. Następnie można wykonać polecenie
 ```
