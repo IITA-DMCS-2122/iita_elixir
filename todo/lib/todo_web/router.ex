@@ -24,6 +24,7 @@ defmodule TodoWeb.Router do
       live "/items/:id", ItemLive.Show, :show
       live "/items/:id/show/edit", ItemLive.Show, :edit
     get "/", PageController, :index
+    resources "/cars", CarController
   end
 
   # Other scopes may use custom stacks.

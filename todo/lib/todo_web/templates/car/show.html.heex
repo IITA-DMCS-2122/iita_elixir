@@ -1,0 +1,23 @@
+<h1>Show Car</h1>
+
+<ul>
+
+  <li>
+    <strong>Make:</strong>
+    <%= @car.make %>
+  </li>
+
+  <li>
+    <strong>Model:</strong>
+    <%= @car.model %>
+  </li>
+
+  <li>
+    <strong>Link:</strong>
+    <%= @car.link %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.car_path(@conn, :edit, @car) %></span> |
+<span><%= link "Back", to: Routes.car_path(@conn, :index) %></span>
