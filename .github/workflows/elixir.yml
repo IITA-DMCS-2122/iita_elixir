@@ -29,14 +29,4 @@ jobs:
     - name: Run tests
       run: mix test
       working-directory: todo
-  deploy:
-    name: Deploy to Heroku
-    runs-on: ubuntu-latest
-    steps:
-      - working-directory: todo
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "iita" 
-          heroku_email: "krystian.kowalski95@gmail.com"
+
