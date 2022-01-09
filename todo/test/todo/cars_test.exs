@@ -59,5 +59,16 @@ defmodule Todo.CarsTest do
       car = car_fixture()
       assert %Ecto.Changeset{} = Cars.change_car(car)
     end
+
+    test "create_car/1 increments total count of cars and delete_car/1 decrements it" do
+      count_before = length(Cars.list_cars())
+
+      create_attrs = %{link: "some link", make: "some make", model: "some model"}
+      {:ok, %Car{} = car} = Cars.create_car(create_attrs)
+      assert length(Cars.list_cars()) == count_before + 1
+
+      Cars.delete_car(car)
+      assert length(Cars.list_cars()) == count_before
+    end
   end
 end
