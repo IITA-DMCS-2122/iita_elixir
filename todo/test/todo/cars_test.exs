@@ -70,5 +70,21 @@ defmodule Todo.CarsTest do
       Cars.delete_car(car)
       assert length(Cars.list_cars()) == count_before
     end
+
+    test "create_car/1, update_car/2 and delete_car/1" do
+      init_length = length(Cars.list_cars())
+      create_attributes = %{link: "link", make: "Mercedes", model: "S Class"}
+      {:ok, %Car{} = car} = Cars.create_car(create_attributes)
+
+      update_attributes = %{link: "link4", make: "Mercedes", model: "AMG"}
+
+      assert {:ok, %Car{} = car} = Cars.update_car(car, update_attributes)
+      assert car.link == "link4"
+      assert car.make == "Mercedes"
+      assert car.model == "AMG"
+
+      Cars.delete_car(car)
+      assert length(Cars.list_cars()) == init_length
+    end
   end
 end
