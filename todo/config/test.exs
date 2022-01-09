@@ -6,10 +6,12 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :todo, Todo.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "todo_test#{System.get_env("MIX_TEST_PARTITION")}",
+  username: "olrgsemzyzxyfr",
+  password: "eb1ed57e8321136a4d1d4964d8a65b260e329b64ef9ee3c63a5807c733d3fd4d",
+  hostname: "ec2-34-246-24-110.eu-west-1.compute.amazonaws.com",
+  database: "d95dt5ftbekr6g",
+  maintenance_database: "d95dt5ftbekr6g",
+  ssl: true,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
