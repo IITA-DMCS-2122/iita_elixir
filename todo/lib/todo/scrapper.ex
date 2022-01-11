@@ -12,11 +12,11 @@ defmodule Todo.Scrapper do
       [%String, ...]
 
   """
-  def get_page_cars_links(page_number) do
+  def get_page_cars_links(page_number, address_start_value) do
     adress = if page_number === 1 do
-        "https://www.olx.pl/motoryzacja/samochody/"
+        address_start_value
       else
-        "https://www.olx.pl/motoryzacja/samochody/?page=" <> Integer.to_string(page_number)
+        address_start_value <> "?page=" <> Integer.to_string(page_number)
     end
     case HTTPoison.get(adress) do
     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
@@ -43,8 +43,9 @@ defmodule Todo.Scrapper do
       21
 
   """
-  def get_pages_number() do
-    case HTTPoison.get("https://www.olx.pl/motoryzacja/samochody/") do
+  def get_pages_number(address) do
+    IO.puts("WORKIG " <> address)
+    case HTTPoison.get(address) do
     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
       urls =
       body
@@ -74,10 +75,10 @@ defmodule Todo.Scrapper do
       [[%String, ...], ...]
 
   """
-  def get_all_cars_from_all_pages() do
-    pages_number = Todo.Scrapper.get_pages_number()
+  def get_all_cars_from_all_pages(address) do
+    pages_number = Todo.Scrapper.get_pages_number(address)
     for n <- 1..pages_number do
-      get_page_cars_links(n)
+      get_page_cars_links(n, address)
     end
   end
 
@@ -92,7 +93,24 @@ defmodule Todo.Scrapper do
 
   """
   def get_result_as_one_list() do
-    all_pages = Todo.Scrapper.get_all_cars_from_all_pages()
+    address = "https://www.olx.pl/motoryzacja/samochody/"
+    all_pages = Todo.Scrapper.get_all_cars_from_all_pages(address)
+    List.flatten(all_pages)
+  end
+
+
+  @doc """
+  Returns a link list of individual cars from olx page, based on query phrase.
+
+  ## Examples
+
+      iex> get_result_as_one_list()
+      [[%String, ...]]
+
+  """
+  def get_result_as_one_list_query(querry_phrase) do
+    address = "https://www.olx.pl/motoryzacja/samochody/q-" <> querry_phrase <> "/"
+    all_pages = Todo.Scrapper.get_all_cars_from_all_pages(address)
     List.flatten(all_pages)
   end
 end
