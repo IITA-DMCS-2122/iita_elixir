@@ -9,7 +9,6 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     steps:
-    - working-directory: todo
     - uses: actions/checkout@v2
     - name: Set up Elixir
       uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
@@ -24,8 +23,10 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
       run: mix deps.get
+      working-directory: todo
     - name: Run tests
       run: mix test
+      working-directory: todo
   deploy:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
