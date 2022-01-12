@@ -3,6 +3,7 @@ defmodule Todo.Scrapper do
   The Scrapper context.
   """
 
+  import Todo.Scrapper.Helpers
   @doc """
   Returns a link list of individual cars for specified page from olx page.
 
@@ -20,19 +21,18 @@ defmodule Todo.Scrapper do
     end
     case HTTPoison.get(adress) do
     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-      urls =
       body
-      |> Floki.find("h3")
+      |> Floki.parse_document!()
       |> Floki.find("a")
+      |> get_elements_with_attribute_value("data-cy", "listing-ad-title")
       |> Floki.attribute("href")
-      urls
+
     {:ok, %HTTPoison.Response{status_code: 404}} ->
       IO.puts "Not found :("
     {:error, %HTTPoison.Error{reason: reason}} ->
       IO.inspect reason
    end
   end
-
 
   @doc """
   Returns a page number for cars from olx page
