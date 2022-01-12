@@ -9,6 +9,7 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     steps:
+    - working-directory: todo
     - uses: actions/checkout@v2
     - name: Set up Elixir
       uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
@@ -29,6 +30,7 @@ jobs:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
     steps:
+      - working-directory: todo
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
