@@ -20,4 +20,11 @@ defmodule Todo.Scrapper.Helpers do
       _other -> nil end)
   end
 
+  def get_offer_links(body) do
+    body
+    |> Floki.parse_document!()
+    |> Floki.find("a")
+    |> get_elements_with_attribute_value("data-cy", "listing-ad-title")
+    |> Floki.attribute("href")
+  end
 end
