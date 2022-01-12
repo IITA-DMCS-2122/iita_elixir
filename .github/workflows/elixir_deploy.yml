@@ -1,11 +1,11 @@
 name: IITA CI/CD
 
 on:
-  push: 
-    branches: [cicd]
-    
+  push:
+    branches: [ cicd ]
+
 jobs:
-  build:
+  build:  
     name: Build and test
     runs-on: ubuntu-latest
     steps:
@@ -23,15 +23,12 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
       run: mix deps.get
-      working-directory: todo
     - name: Run tests
       run: mix test
-      working-directory: todo
   deploy:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
     steps:
-      - working-directory: todo
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
