@@ -58,16 +58,18 @@ defmodule Todo.Scrapper do
 
   """
   def get_page_cars_links(page_number) do
-    adress = if page_number === 1 do
+    adress = if page_number === "1" do
         "https://www.olx.pl/motoryzacja/samochody/"
       else
-        "https://www.olx.pl/motoryzacja/samochody/?page=" <> Integer.to_string(page_number)
+        "https://www.olx.pl/motoryzacja/samochody/?page=" <> page_number
     end
     case HTTPoison.get(adress) do
     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
       get_offer_links(body)
     {:ok, %HTTPoison.Response{status_code: 404}} ->
-      IO.puts "Not found :("
+      IO.puts "Not found"
+    {:ok, %HTTPoison.Response{status_code: 301}} ->
+      IO.puts "Unauthorized"
     {:error, %HTTPoison.Error{reason: reason}} ->
       IO.inspect reason
    end

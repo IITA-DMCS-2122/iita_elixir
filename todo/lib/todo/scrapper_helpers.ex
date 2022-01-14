@@ -47,7 +47,7 @@ defmodule Todo.Scrapper.Helpers do
     end
   end
 
-  def parse_car_details(tags) do
+  def parse_car_details(tags, link) do
     make = for tag <- tags do
       span_text = tag |> Floki.find("span.offer-params__label") |> Floki.text()
       div_text = tag |> Floki.find("div.offer-params__value") |> Floki.text()
@@ -58,7 +58,7 @@ defmodule Todo.Scrapper.Helpers do
       div_text = tag |> Floki.find("div.offer-params__value") |> Floki.text()
       if span_text === "Model pojazdu", do: div_text |> String.trim()
     end |> Enum.reject(&is_nil/1) |> Enum.at(0)
-    {:make, make, :model, model}
+    %{make: make, model: model, link: link}
   end
 
   def get_car_details(link) do
@@ -67,9 +67,11 @@ defmodule Todo.Scrapper.Helpers do
         body
         |> Floki.parse_document!()
         |> Floki.find("li.offer-params__item")
-        |> parse_car_details()
+        |> parse_car_details(link)
       {:ok, %HTTPoison.Response{status_code: 404}} ->
-        IO.puts "Not found :("
+        IO.puts "Not found"
+      {:ok, %HTTPoison.Response{status_code: 301}} ->
+        IO.puts "Unauthorized"
       {:error, %HTTPoison.Error{reason: reason}} ->
         IO.inspect reason
     end
