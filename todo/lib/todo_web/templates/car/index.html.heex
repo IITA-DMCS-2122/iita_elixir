@@ -1,5 +1,12 @@
 <h1>Listing Cars</h1>
 
+<div>
+<%= link "New Car", to: Routes.car_path(@conn, :new) %>
+</div>
+<div>
+<%= link "Scrapp data", to: Routes.scrapper_path(@conn, :new) %>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -27,9 +34,3 @@
   </tbody>
 </table>
 
-<div>
-<%= link "New Car", to: Routes.car_path(@conn, :new) %>
-</div>
-<div>
-<%= link "Scrapp data", to: Routes.scrapper_path(@conn, :new) %>
-</div>

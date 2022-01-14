@@ -9,5 +9,6 @@ defmodule Todo.Repo.Migrations.CreateCars do
 
       timestamps()
     end
+    create index(:cars, [:link], unique: true)
   end
 end
