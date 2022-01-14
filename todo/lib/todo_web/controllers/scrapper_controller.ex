@@ -23,10 +23,10 @@ defmodule TodoWeb.ScrapperController do
           rescue
             e in Ecto.ConstraintError -> IO.puts("Próba dodanie tego samego rekordu")
           end
-
       end
     end
     changeset = Scrapp.changeset(%Scrapp{})
+    conn = put_flash(conn, :info, "Scrapping process completed")
     render(conn, "new.html", changeset: changeset)
   end
 end
