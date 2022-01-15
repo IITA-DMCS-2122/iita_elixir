@@ -11,5 +11,5 @@ apt-get install docker-compose
 
 Next, in main project directory, we run:
 ```
-docker-compose up
+docker-compose up --build
 ```
