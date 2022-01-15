@@ -1,4 +1,4 @@
-# iita_elixir
+# iita_elixir 1
 Project for IITA 2021 2022
 
 ## Installation DB
