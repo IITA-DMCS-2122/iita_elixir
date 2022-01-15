@@ -4,6 +4,7 @@ defmodule Todo.Scrapper do
   """
 
   import Todo.Scrapper.Helpers
+  import Todo.Cars
 
   @doc """
   Returns list of all car details from olx page.
@@ -44,8 +45,14 @@ defmodule Todo.Scrapper do
 
   """
   def get_car_details_from_page(page_number) do
-    get_page_cars_links(page_number)
-    |> Enum.map(&get_car_details/1)
+    links = get_page_cars_links(page_number)
+    details = links |> Enum.map(&get_car_details/1)
+
+    Enum.zip(details, links)
+    |> Enum.map(fn x -> Map.put(elem(x, 0), :link, elem(x, 1)) end)
+    |> Enum.filter(fn x -> x[:make] !== nil && x[:model] !== nil end)
+    #create_car()
+
   end
 
   @doc """

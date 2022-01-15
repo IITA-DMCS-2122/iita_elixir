@@ -14,17 +14,10 @@ defmodule TodoWeb.ScrapperController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"scrapp" => scrapp_params}) do
-    scrapped_data = Scrapper.get_car_details_from_page(scrapp_params["page_number"])
-    for car_params <- scrapped_data do
-      if car_params[:link] not in [nil] and car_params[:make] not in [nil] and car_params[:model] not in [nil] do
-        try do
-            Cars.create_car(car_params)
-          rescue
-            e in Ecto.ConstraintError -> IO.puts("Próba dodanie tego samego rekordu")
-          end
-      end
-    end
+    Scrapper.get_car_details_from_page(scrapp_params["page_number"])
+    |> Enum.map(&Cars.create_car/1)
     changeset = Scrapp.changeset(%Scrapp{})
     conn = put_flash(conn, :info, "Scrapping process completed")
     render(conn, "new.html", changeset: changeset)
