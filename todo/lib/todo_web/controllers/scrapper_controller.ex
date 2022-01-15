@@ -19,6 +19,7 @@ defmodule TodoWeb.ScrapperController do
     Scrapper.get_car_details_from_page(scrapp_params["page_number"])
     |> Enum.map(&Cars.create_car/1)
     changeset = Scrapp.changeset(%Scrapp{})
+    Sentry.capture_message("Info", extra: %{extra: "Scrapping process completed"})
     conn = put_flash(conn, :info, "Scrapping process completed")
     render(conn, "new.html", changeset: changeset)
   end
