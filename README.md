@@ -1,7 +1,7 @@
 # iita_elixir
 Project for IITA 2021 2022
 
-## Uruchomienie aplikacji todo
+## Running application todo
 
 To run this application it is necessary to have Docker-compose installed on your machine. To install we run:
 
