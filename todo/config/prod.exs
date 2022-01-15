@@ -20,7 +20,7 @@ config :todo, TodoWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   url: [scheme: "https", host: "iita.herokuapp.com", port: 443], force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  http: [ip: {0, 0, 0, 0}, port: 4000],
+  http: [ip: {0, 0, 0, 0}, port: System.get_env("PORT")],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
