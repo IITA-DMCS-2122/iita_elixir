@@ -23,7 +23,7 @@ defmodule TodoWeb.ScrapperController do
     changeset = Scrapp.changeset(%Scrapp{})
     Sentry.capture_message("Info", extra: %{extra: "Scrapping process completed"})
     Email.build()
-    |> Email.put_from("ikriss95@gmail.com")
+    |> Email.put_from("lks74551@zwoho.com")
     |> Email.add_to("lks74551@zwoho.com")
     |> Email.put_subject("Temat")
     |> Email.put_text("Przykładowy mail")
