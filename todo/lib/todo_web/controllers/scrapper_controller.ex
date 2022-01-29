@@ -1,6 +1,8 @@
+
 defmodule TodoWeb.ScrapperController do
   use TodoWeb, :controller
 
+  alias SendGrid.{Mail, Email}
   alias Todo.Cars
   alias Todo.Scrapp.Scrapp
   alias Todo.Scrapper
@@ -20,6 +22,12 @@ defmodule TodoWeb.ScrapperController do
     |> Enum.map(&Cars.create_car/1)
     changeset = Scrapp.changeset(%Scrapp{})
     Sentry.capture_message("Info", extra: %{extra: "Scrapping process completed"})
+    Email.build()
+    |> Email.put_from("ikriss95@gmail.com")
+    |> Email.add_to("lks74551@zwoho.com")
+    |> Email.put_subject("Temat")
+    |> Email.put_text("Przykładowy mail")
+    |> Mail.send()
     conn = put_flash(conn, :info, "Scrapping process completed")
     render(conn, "new.html", changeset: changeset)
   end
