@@ -52,6 +52,7 @@ defmodule Todo.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:sentry, "8.0.0"},
       {:hackney, "~> 1.8"},
+      {:sendgrid, "~> 2.0"}
     ]
   end
 

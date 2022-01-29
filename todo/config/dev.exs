@@ -73,3 +73,12 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :sendgrid,
+  api_key: "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"
+
+config :sendgrid,
+phoenix_view: MyApp.Web.EmailView
+
+config :sendgrid,
+  phoenix_layout: {MyApp.Web.EmailView, :layout}
